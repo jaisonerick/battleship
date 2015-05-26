@@ -7,6 +7,7 @@ var cowsay   = require('cowsay');
 var _        = require('lodash');
 
 var debug = process.env.DEBUG || false;
+var maxAttempts = process.env.ATTEMPS || 10;
 
 var questions = {
   where: {
@@ -119,7 +120,7 @@ var play = (function() {
         return won();
       }
       tries++;
-      if(tries > 2) {
+      if(tries > maxAttempts) {
         lost(shipPosition, boardStatus);
         return tryAgain(function(retry) {
           if(!retry) return ;
